@@ -3,9 +3,9 @@ import canvas
 
 
 class Snake:
-    def __init__(self, pos):
+    def __init__(self, pos, direction):
         self.elements = [pos]
-        self.direction = Direction.RIGHT
+        self.direction = direction
 
     def get_snake(self):
         return self.elements
@@ -22,18 +22,18 @@ class Snake:
         if self.direction == Direction.RIGHT:
             new_head = canvas.Point(old_head.x + 1, old_head.y)
         elif self.direction == Direction.DOWN:
-            new_head = canvas.Point(old_head.x, old_head.y - 1)
+            new_head = canvas.Point(old_head.x, old_head.y + 1)
         elif self.direction == Direction.LEFT:
             new_head = canvas.Point(old_head.x - 1, old_head.y)
         elif self.direction == Direction.UP:
-            new_head = canvas.Point(old_head.x, old_head.y + 1)
+            new_head = canvas.Point(old_head.x, old_head.y - 1)
 
         self.elements.append(new_head)
 
         # Remove tail
         self.elements.pop(0)
 
-        print(self.elements)
+        print("move: " + str(self.direction) + ", result: " + str(self.elements))
 
 
 class Direction(Enum):

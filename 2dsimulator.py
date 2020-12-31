@@ -1,23 +1,21 @@
 from p5 import *
 
-import canvas
-import objects
+import game
 
-grid_height = 8
-grid_width = 8
+speed = 0.1
 step = 40
-snake = objects.Snake(canvas.Point(1, 0))
-apple = objects.Apple(canvas.Point(2, 3))
+game = game.Game(8, 8)
 
 
 def setup():
     # Set size of the canvas
-    size(step * (grid_width + 1), step * (grid_height + 1))
+    size(step * (game.grid.width + 1), step * (game.grid.height + 1))
 
 
 def draw():
-    snake.move()
-    led_grid = draw_grid(grid_width, grid_height, snake, apple)
+    time.sleep(speed)
+    game.update()
+    led_grid = create_grid(game.grid.width, game.grid.height, game.snake, game.apples)
     background(225)
     no_stroke()
 
@@ -28,7 +26,7 @@ def draw():
             circle(step * (led.x + 1), step * (led.y + 1), 15)
 
 
-def draw_grid(width, height, snake, apple):
+def create_grid(width, height, snake, apples):
     grid = []
     for i in range(0, height):
         grid.append([])
@@ -37,13 +35,17 @@ def draw_grid(width, height, snake, apple):
 
     if snake is not None:
         for element in snake.elements:
-            grid[element.y][element.x].set_color(Color(0, 255, 0))
+            if element.x < width and element.y < height:
+                grid[element.y][element.x].set_color(Color(0, 255, 0))
 
-    if apple is not None:
+    if apples:
+        apple = apples[0]
         grid[apple.pos.x][apple.pos.y].set_color(Color(255, 0, 0))
 
     return grid
 
+def key_pressed():
+    game.process_input(key)
 
 class Led:
     def __init__(self, x, y, c):
