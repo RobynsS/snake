@@ -33,7 +33,9 @@ class Snake:
         # Remove tail
         self.elements.pop(0)
 
-        print("move: " + str(self.direction) + ", result: " + str(self.elements))
+    def set_direction(self, new_direction):
+        if new_direction != self.direction.opposite():
+            self.direction = new_direction
 
 
 class Direction(Enum):
@@ -41,6 +43,18 @@ class Direction(Enum):
     DOWN = 2
     LEFT = 3
     UP = 4
+
+    def opposite(self):
+        if self.value == 1:
+            return Direction.LEFT
+        elif self.value == 2:
+            return Direction.UP
+        elif self.value == 3:
+            return Direction.RIGHT
+        elif self.value == 4:
+            return Direction.DOWN
+        else:
+            return None
 
 
 class Apple:

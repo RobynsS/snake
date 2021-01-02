@@ -45,7 +45,7 @@ def create_grid(width, height, snake, apples):
     return grid
 
 def key_pressed():
-    game.process_input(key)
+    game.process_input(str(key))
 
 class Led:
     def __init__(self, x, y, c):

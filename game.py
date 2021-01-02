@@ -15,16 +15,19 @@ class Game:
         self.snake.move()
         self.create_apple()
 
-    def process_input(self, key):
-        if key == 'UP':
-            self.snake.direction = objects.Direction.UP
-        elif key == 'RIGHT':
-            self.snake.direction = objects.Direction.RIGHT
-        elif key == 'LEFT':
-            self.snake.direction = objects.Direction.LEFT
-        elif key == 'DOWN':
-            self.snake.direction = objects.Direction.DOWN
-        # TODO: make it impossible to make a 360° turn
+    def process_input(self, value):
+        if value in {'UP', 'RIGHT', 'DOWN', 'LEFT'}:
+            direction = None
+            if value == 'UP':
+                direction = objects.Direction.UP
+            elif value == 'RIGHT':
+                direction = objects.Direction.RIGHT
+            elif value == 'LEFT':
+                direction = objects.Direction.LEFT
+            elif value == 'DOWN':
+                direction = objects.Direction.DOWN
+
+            self.snake.set_direction(direction)
 
     def create_apple(self):
         if not self.apples:
