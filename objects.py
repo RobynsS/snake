@@ -14,6 +14,10 @@ class Snake:
         length = len(self.elements)
         return self.elements[length - 1]
 
+    def set_head(self, head):
+        length = len(self.elements)
+        self.elements[length - 1] = head
+
     def move(self):
 
         # Add new head to snake

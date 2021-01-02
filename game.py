@@ -13,7 +13,17 @@ class Game:
 
     def update(self):
         self.snake.move()
+        self.correct_snake_on_grid()
         self.create_apple()
+
+    def correct_snake_on_grid(self):
+        snake_head = self.snake.get_head()
+        if snake_head.x >= self.grid.width or snake_head.x < 0:
+            snake_head.x = snake_head.x % self.grid.width
+        if snake_head.y >= self.grid.height or snake_head.y < 0:
+            snake_head.y = snake_head.y % self.grid.height
+
+        self.snake.set_head(snake_head)
 
     def process_input(self, value):
         if value in {'UP', 'RIGHT', 'DOWN', 'LEFT'}:
