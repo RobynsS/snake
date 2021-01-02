@@ -9,7 +9,7 @@ class Game:
         self.grid = canvas.Grid(height, width)
         self.snake = objects.Snake(canvas.Point((round(width / 2) - 1), (round(height / 2)) - 1),
                                    objects.Direction.RIGHT)
-        self.apples = []
+        self.food = []
 
     def update(self):
         self.snake.move()
@@ -40,7 +40,28 @@ class Game:
             self.snake.set_direction(direction)
 
     def create_apple(self):
-        if not self.apples:
-            x = random.randint(0, self.grid.width - 1)
-            y = random.randint(0, self.grid.height - 1)
-            self.apples.append(objects.Apple(canvas.Point(x, y)))
+
+        # Get the points of free space where an apple can spawn
+        free_space = []
+        for i in range(0, self.grid.width):
+            free_space.append([])
+            for j in range(0, self.grid.height):
+                free_space[i].append(True)
+
+        for element in self.snake.elements:
+            free_space[element.x][element.y] = False
+
+        for piece in self.food:
+            free_space[piece.pos.x][piece.pos.y] = False
+
+        # Turn free space into list
+        free_space_list = []
+        for i in range(0, self.grid.width):
+            for j in range(0, self.grid.height):
+                if free_space[i][j]:
+                    free_space_list.append(canvas.Point(i, j))
+
+        if not self.food:
+            random_index = random.randint(0, len(free_space_list) - 1)
+            pos = free_space_list[random_index]
+            self.food.append(objects.Apple(canvas.Point(pos.x, pos.y)))

@@ -15,7 +15,7 @@ def setup():
 def draw():
     time.sleep(speed)
     game.update()
-    led_grid = create_grid(game.grid.width, game.grid.height, game.snake, game.apples)
+    led_grid = create_grid(game.grid.width, game.grid.height, game.snake, game.food)
     background(225)
     no_stroke()
 
