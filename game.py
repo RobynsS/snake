@@ -7,7 +7,9 @@ import canvas
 class Game:
     def __init__(self, width, height):
         self.grid = canvas.Grid(height, width)
-        self.snake = objects.Snake(canvas.Point((round(width / 2) - 1), (round(height / 2)) - 1),
+        self.snake = objects.Snake(canvas.Point((round(width / 2) - 3), (round(height / 2) - 1)),
+                                   canvas.Point((round(width / 2) - 2), (round(height / 2) - 1)),
+                                   canvas.Point((round(width / 2 - 1)), (round(height / 2) - 1)),
                                    objects.Direction.RIGHT)
         self.food = []
         self.create_apple()
@@ -83,8 +85,6 @@ class Game:
         head = self.snake.get_head()
 
         for piece in self.food:
-            print("pos apple = " + str(piece.pos))
-            print("pos snake = " + str(head))
             if piece.pos == head:
                 return piece
 

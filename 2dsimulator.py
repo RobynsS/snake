@@ -40,7 +40,11 @@ def create_grid(width, height, snake, apples):
 
         # Give snake head different color
         head = snake.elements[len(snake.elements)-1]
-        grid[head.y][head.x].set_color(Color(173, 255, 47))
+        grid[head.y][head.x].set_color(Color(0, 153, 0))
+
+        # Give snake tail different color
+        tail = snake.elements[0]
+        grid[tail.y][tail.x].set_color(Color(178, 255, 178))
 
 
     if apples:

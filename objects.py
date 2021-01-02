@@ -3,8 +3,8 @@ import canvas
 
 
 class Snake:
-    def __init__(self, pos, direction):
-        self.elements = [pos]
+    def __init__(self, pos1, pos2, pos3, direction):
+        self.elements = [pos1, pos2, pos3]
         self.direction = direction
 
     def get_snake(self):
