@@ -38,6 +38,11 @@ def create_grid(width, height, snake, apples):
             if element.x < width and element.y < height:
                 grid[element.y][element.x].set_color(Color(0, 255, 0))
 
+        # Give snake head different color
+        head = snake.elements[len(snake.elements)-1]
+        grid[head.y][head.x].set_color(Color(173, 255, 47))
+
+
     if apples:
         apple = apples[0]
         grid[apple.pos.y][apple.pos.x].set_color(Color(255, 0, 0))
