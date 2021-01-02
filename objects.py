@@ -18,8 +18,7 @@ class Snake:
         length = len(self.elements)
         self.elements[length - 1] = head
 
-    def move(self):
-
+    def grow(self):
         # Add new head to snake
         old_head = self.get_head()
         new_head = None
@@ -33,6 +32,9 @@ class Snake:
             new_head = canvas.Point(old_head.x, old_head.y - 1)
 
         self.elements.append(new_head)
+
+    def move(self):
+        self.grow()
 
         # Remove tail
         self.elements.pop(0)

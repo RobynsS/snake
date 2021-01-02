@@ -6,6 +6,12 @@ class Point:
     def __repr__(self):
         return "(" + str(self.x) + "," + str(self.y) + ")"
 
+    def __eq__(self, other):
+        """Overrides the default implementation"""
+        if isinstance(other, Point):
+            return self.x == other.x and self.y == other.y
+        return False
+
 
 class Grid:
     def __init__(self, height, width):

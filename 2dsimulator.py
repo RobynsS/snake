@@ -40,7 +40,7 @@ def create_grid(width, height, snake, apples):
 
     if apples:
         apple = apples[0]
-        grid[apple.pos.x][apple.pos.y].set_color(Color(255, 0, 0))
+        grid[apple.pos.y][apple.pos.x].set_color(Color(255, 0, 0))
 
     return grid
 

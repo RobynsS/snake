@@ -10,11 +10,23 @@ class Game:
         self.snake = objects.Snake(canvas.Point((round(width / 2) - 1), (round(height / 2)) - 1),
                                    objects.Direction.RIGHT)
         self.food = []
+        self.create_apple()
+        self.growth_status = 0
 
     def update(self):
-        self.snake.move()
+        if self.growth_status:
+            self.snake.grow()
+            self.growth_status = self.growth_status - 1
+        else:
+            self.snake.move()
+
         self.correct_snake_on_grid()
-        self.create_apple()
+
+        eaten_food = self.snake_eats_food()
+        if eaten_food:
+            self.food.remove(eaten_food)
+            self.growth_status = self.growth_status + 1
+            self.create_apple()
 
     def correct_snake_on_grid(self):
         snake_head = self.snake.get_head()
@@ -65,3 +77,15 @@ class Game:
             random_index = random.randint(0, len(free_space_list) - 1)
             pos = free_space_list[random_index]
             self.food.append(objects.Apple(canvas.Point(pos.x, pos.y)))
+
+
+    def snake_eats_food(self):
+        head = self.snake.get_head()
+
+        for piece in self.food:
+            print("pos apple = " + str(piece.pos))
+            print("pos snake = " + str(head))
+            if piece.pos == head:
+                return piece
+
+        return None
